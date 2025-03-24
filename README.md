@@ -30,8 +30,8 @@ Below is the connection diagram for **PZEM-003 with Arduino using RS485 Auto**:
 
 | **PZEM-003** | **RS485 Auto** | **Arduino (Uno/Mega, etc.)** | **ESP8266 / ESP32** |
 |-------------|---------------|--------------------------|---------------------|
-| A (RS485+) | A             | D7 (SoftwareSerial RX)  | GPIO (e.g., 16 for RX) |
-| B (RS485-) | B             | D8 (SoftwareSerial TX)  | GPIO (e.g., 17 for TX) |
+| A (RS485+) | A ---- RX     | D7 (SoftwareSerial RX)  | GPIO (e.g., 16 for RX) |
+| B (RS485-) | B ---- TX     | D8 (SoftwareSerial TX)  | GPIO (e.g., 17 for TX) |
 | VCC        | VCC (5V/3.3V) | 5V                       | 3.3V or 5V (check module support) |
 | GND        | GND           | GND                      | GND |
 
