@@ -1,87 +1,108 @@
+//    FILE: M Makhfud.cpp
+//  AUTHOR: M Makhfud
+// VERSION: 1.0.6
+//    DATE: 2025-03-24
+// PURPOSE: ACS712 library - measurement
+//     URL: https://github.com/MuhammadMakhfud/PZEM003_Fud
+
 #include "PZEM003_Fud.h"
 #include <Arduino.h>
 
-PZEM003::PZEM003_Fud(uint8_t rxPin, uint8_t txPin, uint8_t address) 
+PZEM003::PZEM003_Fud(uint8_t rxPin, uint8_t txPin, uint8_t address)
     : pzemSerial(rxPin, txPin), address(address), ptr(buffer) {}
 
-void PZEM003::begin(uint32_t baudRate) {
+void PZEM003::begin(uint32_t baudRate)
+{
     pzemSerial.begin(baudRate);
 }
 
-void PZEM003::update() {
+void PZEM003::update()
+{
     readData();
 }
 
-void PZEM003::resetEnergy() {
+void PZEM003::resetEnergy()
+{
     byte command[] = {address, 0x42, 0x00, 0x00};
     sendCommand(command, sizeof(command));
 }
 
-float PZEM003::getVoltage() {
+float PZEM003::getVoltage()
+{
     return voltage;
 }
 
-float PZEM003::getCurrent() {
+float PZEM003::getCurrent()
+{
     return current;
 }
 
-float PZEM003::getPower() {
+float PZEM003::getPower()
+{
     return power;
 }
 
-float PZEM003::getEnergy() {
+float PZEM003::getEnergy()
+{
     return energy;
 }
 
-void PZEM003::readData() {
+void PZEM003::readData()
+{
     byte command[] = {address, 0x04, 0x00, 0x00, 0x00, 0x08};
     sendCommand(command, sizeof(command));
 
-// Reset values
+    // Reset values
     voltage = 0;
     current = 0;
     power = 0;
     energy = 0;
 
     unsigned long startTime = millis();
-    while (!pzemSerial.available() && (millis() - startTime) < 500) {
+    while (!pzemSerial.available() && (millis() - startTime) < 500)
+    {
         yield(); // Biarkan WDT direset
     }
 
-    if (pzemSerial.available()) {
+    if (pzemSerial.available())
+    {
         // Clear buffer before reading new data
         memset(buffer, 0x00, sizeof(buffer));
         ptr = buffer;
 
-        while (pzemSerial.available()) {
+        while (pzemSerial.available())
+        {
             *ptr++ = pzemSerial.read();
             delay(10);
         }
 
-        if (memcmp(buffer, command, 2) == 0) {
+        if (memcmp(buffer, command, 2) == 0)
+        {
             ptr = buffer;
             voltage = ((ptr[3] << 8) + ptr[4]) * 0.01;
             current = ((ptr[5] << 8) + ptr[6]) * 0.01;
             power = (((uint32_t)ptr[9] << 24) + ((uint32_t)ptr[10] << 16) + (ptr[7] << 8) + ptr[8]) * 0.1;
             energy = (((uint32_t)ptr[13] << 24) + ((uint32_t)ptr[14] << 16) + (ptr[11] << 8) + ptr[12]);
-        } else {
+        }
+        else
+        {
             // Serial.println("Data tidak cocok, reset serial");
             pzemSerial.end();
             delay(70);
             pzemSerial.begin(9600);
-
         }
-    } else {
+    }
+    else
+    {
         // Serial.println("Tidak ada data sensor");
         pzemSerial.end();
         delay(50);
         pzemSerial.begin(9600);
-
     }
 }
 
-
-void PZEM003::sendCommand(byte* command, size_t length) {
+void PZEM003::sendCommand(byte *command, size_t length)
+{
     uint16_t crc = calcCRC(command, length);
     pzemSerial.write(command, length);
     pzemSerial.write(lowByte(crc));
@@ -89,13 +110,18 @@ void PZEM003::sendCommand(byte* command, size_t length) {
     delay(10);
 }
 
-uint16_t PZEM003::calcCRC(byte* data, byte length) {
+uint16_t PZEM003::calcCRC(byte *data, byte length)
+{
     uint16_t crc = 0xFFFF;
-    for (byte i = 0; i < length; i++) {
+    for (byte i = 0; i < length; i++)
+    {
         crc ^= data[i];
-        for (byte j = 0; j < 8; j++) {
-            if (crc & 1) crc = (crc >> 1) ^ 0xA001;
-            else crc = crc >> 1;
+        for (byte j = 0; j < 8; j++)
+        {
+            if (crc & 1)
+                crc = (crc >> 1) ^ 0xA001;
+            else
+                crc = crc >> 1;
         }
     }
     return crc;

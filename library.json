@@ -7,7 +7,7 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Jakub Mandula",
+            "name": "Makhfud",
             "url": "https://github.com/MuhammadMakhfud/"
         }
     ],
@@ -16,7 +16,7 @@
         "url": "https://github.com/MuhammadMakhfud/PZEM003_Fud"
     },
     "platforms": "atmelavr, ststm32, espressif8266, espressif32",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "export": {
         "include": [
             "README.md",
