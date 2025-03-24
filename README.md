@@ -5,7 +5,9 @@
 ## Overview
 **PZEM003_Fud** is a lightweight and easy-to-use **Arduino library** for interfacing with the **PZEM-003 power meter** using **RS485 Auto**. This library simplifies communication with the sensor by providing functions to read **voltage, current, power, and energy** directly from the module.
 
-This library was inspired by the communication approach from [Project Semesin](https://www.project.semesin.com/2019/09/14/komunikasi-modbus-dengan-arduino-sebagai-master-read-input-register-tanpa-library/#comment-4556). However, instead of using a manual RS485 module, this library is designed for **RS485 Auto**, making the setup and usage much simpler.
+It supports various Arduino boards, including Arduino Uno, Mega, ESP8266 (NodeMCU), and ESP32, using SoftwareSerial for communication.
+
+This library was inspired by the communication approach from [Project Semesin](https://www.project.semesin.com/2019/09/14/komunikasi-modbus-dengan-arduino-sebagai-master-read-input-register-tanpa-library/#comment-4556). However, instead of using a manual RS485 module, this library is designed for RS485 Auto, making the setup and usage much simpler. The code structure has been optimized, simplified, and packaged into a reusable Arduino library for easier integration into projects.
 
 ---
 
@@ -24,11 +26,14 @@ Below is the connection diagram for **PZEM-003 with Arduino using RS485 Auto**:
 
 
 
-**Connections:**
-- **PZEM-003 A (RS485+)** → **RS485 Auto A** → **Arduino D7**
-- **PZEM-003 B (RS485-)** → **RS485 Auto B** → **Arduino D8**
-- **PZEM-003 VCC** → **RS485 Auto VCC (5V)** → **Arduino 5V**
-- **PZEM-003 GND** → **RS485 Auto GND** → **Arduino GND**
+### **Connections:**
+
+| **PZEM-003** | **RS485 Auto** | **Arduino (Uno/Mega, etc.)** | **ESP8266 / ESP32** |
+|-------------|---------------|--------------------------|---------------------|
+| A (RS485+) | A ---- RX     | D7 (SoftwareSerial RX)  | GPIO (e.g., 16 for RX) |
+| B (RS485-) | B ---- TX     | D8 (SoftwareSerial TX)  | GPIO (e.g., 17 for TX) |
+| VCC        | VCC (5V/3.3V) | 5V                       | 3.3V or 5V (check module support) |
+| GND        | GND           | GND                      | GND |
 
 ---
 
@@ -100,4 +105,3 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 ## Author
 📌 **M. Makhfud**  
 📧 Email: m.makhfud.rt@gmail.com  
-🔗 GitHub: [Makhfud](https://github.com/makhfud)
