@@ -1,6 +1,6 @@
 # PZEM003_Fud - Arduino Library for PZEM-003 with RS485 Auto
 
-![PZEM-003](./images/pzem003_module.jpg)
+
 
 ## Overview
 **PZEM003_Fud** is a lightweight and easy-to-use **Arduino library** for interfacing with the **PZEM-003 power meter** using **RS485 Auto**. This library simplifies communication with the sensor by providing functions to read **voltage, current, power, and energy** directly from the module.
@@ -22,7 +22,7 @@ This library was inspired by the communication approach from [Project Semesin](h
 ## Wiring Diagram
 Below is the connection diagram for **PZEM-003 with Arduino using RS485 Auto**:
 
-![Wiring Diagram](./images/pzem003_wiring.png)
+
 
 **Connections:**
 - **PZEM-003 A (RS485+)** → **RS485 Auto A** → **Arduino D7**
