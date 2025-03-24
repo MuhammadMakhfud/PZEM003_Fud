@@ -100,4 +100,3 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 ## Author
 📌 **M. Makhfud**  
 📧 Email: m.makhfud.rt@gmail.com  
-🔗 GitHub: [Makhfud](https://github.com/makhfud)
