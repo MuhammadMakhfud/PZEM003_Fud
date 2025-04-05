@@ -12,19 +12,19 @@ void loop() {
   pzem.update();
 
   Serial.print("Voltage: ");
-  Serial.print(pzem.getVoltage());
+  Serial.print(pzem.getVoltage(), 2);
   Serial.println(" V");
 
   Serial.print("Current: ");
-  Serial.print(pzem.getCurrent());
+  Serial.print(pzem.getCurrent(), 2);
   Serial.println(" A");
 
   Serial.print("Power: ");
-  Serial.print(pzem.getPower());
+  Serial.print(pzem.getPower(), 1);
   Serial.println(" W");
 
   Serial.print("Energy: ");
-  Serial.print(pzem.getEnergy());
+  Serial.print(pzem.getEnergy(), 0);
   Serial.println(" Wh");
 
   if (Serial.available()) {
