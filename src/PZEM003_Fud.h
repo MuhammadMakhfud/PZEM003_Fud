@@ -1,6 +1,6 @@
 //    FILE: M Makhfud.h
 //  AUTHOR: M Makhfud
-// VERSION: 1.0.6
+// VERSION: 1.0.7
 //    DATE: 2025-03-24
 // PURPOSE: PZEM-003 library - measurement
 //     URL: https://github.com/MuhammadMakhfud/PZEM003_Fud
