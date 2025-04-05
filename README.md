@@ -40,7 +40,9 @@ Below is the connection diagram for **PZEM-003 with Arduino using RS485 Auto**:
 ## Installation
 
 ### 1. Install via Arduino Library Manager (Future Support)
-🚀 *Planned for future updates*
+- Buka Arduino IDE
+- Pilih Sketch -> Include Library -> Manage Libraries
+C- ari PZEM003_Fud dan klik Install
 
 ### 2. Manual Installation
 1. **Download the repository**
