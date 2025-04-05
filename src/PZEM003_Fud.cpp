@@ -8,46 +8,46 @@
 #include "PZEM003_Fud.h"
 #include <Arduino.h>
 
-PZEM003::PZEM003_Fud(uint8_t rxPin, uint8_t txPin, uint8_t address)
+PZEM003_Fud::PZEM003_Fud(uint8_t rxPin, uint8_t txPin, uint8_t address)
     : pzemSerial(rxPin, txPin), address(address), ptr(buffer) {}
 
-void PZEM003::begin(uint32_t baudRate)
+void PZEM003_Fud::begin(uint32_t baudRate)
 {
     pzemSerial.begin(baudRate);
 }
 
-void PZEM003::update()
+void PZEM003_Fud::update()
 {
     readData();
 }
 
-void PZEM003::resetEnergy()
+void PZEM003_Fud::resetEnergy()
 {
     byte command[] = {address, 0x42, 0x00, 0x00};
     sendCommand(command, sizeof(command));
 }
 
-float PZEM003::getVoltage()
+float PZEM003_Fud::getVoltage()
 {
     return voltage;
 }
 
-float PZEM003::getCurrent()
+float PZEM003_Fud::getCurrent()
 {
     return current;
 }
 
-float PZEM003::getPower()
+float PZEM003_Fud::getPower()
 {
     return power;
 }
 
-float PZEM003::getEnergy()
+float PZEM003_Fud::getEnergy()
 {
     return energy;
 }
 
-void PZEM003::readData()
+void PZEM003_Fud::readData()
 {
     byte command[] = {address, 0x04, 0x00, 0x00, 0x00, 0x08};
     sendCommand(command, sizeof(command));
@@ -101,7 +101,7 @@ void PZEM003::readData()
     }
 }
 
-void PZEM003::sendCommand(byte *command, size_t length)
+void PZEM003_Fud::sendCommand(byte *command, size_t length)
 {
     uint16_t crc = calcCRC(command, length);
     pzemSerial.write(command, length);
@@ -110,7 +110,7 @@ void PZEM003::sendCommand(byte *command, size_t length)
     delay(10);
 }
 
-uint16_t PZEM003::calcCRC(byte *data, byte length)
+uint16_t PZEM003_Fud::calcCRC(byte *data, byte length)
 {
     uint16_t crc = 0xFFFF;
     for (byte i = 0; i < length; i++)
